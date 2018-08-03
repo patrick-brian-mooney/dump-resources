@@ -1,1 +1,138 @@
-README for Resource Dumper
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://patrickbrianmooney.nfshost.com/~patrick/foaf.rdf" />
+  <meta name="foaf:maker" content="foaf:mbox_sha1sum '48a3091d919c5e75a5b21d2f18164eb4d38ef2cd'" />
+  <link rel="profile" href="http://microformats.org/profile/hcard" />
+  <link rel="pgpkey" type="application/pgp-keys" href="http://patrickbrianmooney.nfshost.com/~patrick/505AB18E-public.asc" />
+  <link rel="author" href="http://plus.google.com/109251121115002208129?rel=author" />
+  <link rel="sitemap" href="/sitemap.xml" />
+  <link rel="home" href="http://patrickbrianmooney.nfshost.com/~patrick/projects/MacOS-programming/ResourceDumper/" title="Home page" />
+  <link rel="icon" type="image/x-icon" href="http://patrickbrianmooney.nfshost.com/~patrick/icons/favicon.ico" />
+
+  <title>Resource Dumper README</title>
+  <meta name="generator" content="Bluefish 2.2.7" />
+  <meta name="author" content="Patrick Mooney" />
+  <meta name="dcterms.rights" content="Copyright © 2018 Patrick Mooney" />
+  <meta name="description" content="README file for Resource Dumper, a utility for classic MacOS" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="2 days" />
+  <meta name="date" content="2018-08-03T13:32:41-0600" />
+  <meta property="fb:admins" content="100006098197123" />
+  <meta property="og:title" content="Resource Dumper README" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://patrickbrianmooney.nfshost.com/~patrick/projects/MacOS-programming/ResourceDumper/README.html" />
+  <meta property="og:image" content="http://patrickbrianmooney.nfshost.com/~patrick/icons/gear-large.png" />
+  <meta property="og:description" content="README file for Resource Dumper, a utility for classic MacOS" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@patrick_mooney" />
+  <meta name="twitter:creator" content="@patrick_mooney" />
+  <meta name="twitter:title" content="Resource Dumper README" />
+  <meta name="twitter:description" content="README file for Resource Dumper, a utility for classic MacOS" />
+  <meta name="twitter:image:src" content="http://patrickbrianmooney.nfshost.com/~patrick/icons/gear-large.png" />
+</head>
+
+<body>
+  <h1>Resource Dumper</h1>
+  <p>v0.1, by <a rel="author" class="vcard fn url" href="http://patrickbrianmooney.nfshost.com/~patrick/">Patrick Mooney</a></p>
+  
+  <p>Just looking for a download link? Download <a rel="me author" href="https://github.com/patrick-brian-mooney/dump-resources/blob/master/Resource%20Dumper.img.hqx"><code>Resource Dumper.img.hqx</code></a>.
+
+  <h2 id="overview">Overview</h2>
+
+  <p>The classic Macintosh Operating System (<q>MacOS</q>) had some very advanced features for its time. One of these was the so-called <q>resource fork</q>, a secondary part of any file that could be used as a lightweight database in which programs could store data that they could easily access quickly. This was a brilliant innovation for its time, because it makes quickly storing and retrieving chunks of data from a file a snap for a programmer: instead of manually parsing an entire file in order to find the requested data, the programmer need only invoke a system call that says something like <q>get me the chunk of text that has ID# 1002.</q> Different types of content can be shoved into the same file's resource fork and retrieved easily without the programmer needing to maintain an overall structure for the heterogeneous data. Removing the necessity for the program to maintain an index of offsets to resources of various types, and of parsing that index, and of dealing with all of the messy implementation details involved in shoving data into a binary blob makes the programmer's task much easier in many small ways while writing code for a classic Macintosh program, and (as always seems to happen when something comes along that helps programmers deal more abstractly with the actual problem at hand instead of mucking around in implementation details), Macintosh programmers made their programs use the resource fork to store all kinds of data and metadata.</p>
+
+  <p>So, for instance, it was quite common for programs to store the metadata for a file in the file's resource fork, while storing the <q>actual data</q> (the file's contents) in the <q>data fork</q>, the part of the file that other operating systems tend to think of as <q>the file</q>. MacOS itself did this with filesystem-level metadata for user files. In fact, MacOS itself baked resource-based data into the structure of MacOS programs, providing an effective way to separate the application's code from the configuration details of the application's performance: the resource forks of the earliest Macintosh applications contained information about where windows should be positioned on screen, and the sounds that should be played by the application, and the pictures that should be displayed by it, and the text that it should display in its help box, and the appearance of the icons that represent the application's documents, and many other things besides. Having a way baked into the file system itself for a programmer to quickly get necessary chunks of data was unique at the time, and substantially reduced the amount of effort required to develop a polished Macintosh application. Too, the way that MacOS itself used the resource fork of application programs encouraged end-users to hack on their own installed applications using standard programmer tools were easily available to many users.</p>
+
+  <p>The problem, of course, was that other operating systems never really followed Apple's lead on this issue, and the <q><q>file</q> means something different and more complex on a Macintosh file system than it does for everyone else</q> problem was a constant issue for people who needed to get information into and out of Macintosh computers. The original Macintosh, with its resource-fork-having filesystem, emerged onto a crowded field in which dozens of incompatible computer models were available, and it was virtually impossible to move information from one kind of computer to another. (<em>No</em>, you can't move your saved game file from your Commodore 64 to your Apple IIe, even though the game is available on both platforms: they can't read each other's disks, and anyway the sequence of bytes saved to a disk by the program is different in each operating system's version. Start the game over from scratch if you move to a new platform.) When everyone expects that data can't easily be moved from one computer line to another, everyone can implement their best ideas from scratch without worrying about interoperability; and so the Macintosh File System came into being, with its resource forks and its expanded metadata (a set of data in which Resource Dumper, incidentally, has absolute no interest) and its set of operating system-level APIs for interacting with these features. But as the plethora of different systems available grew thinner and thinner, users started expecting interoperability, and the complex structure of Macintosh files meant that users had trouble moving data across networks and by moving disks around. In an increasingly interconnected world, a <q>file</q> increasingly needs to be a single blob of data that can be copied unambiguously from system to system without every needing to deal with underlying semantic quirks; and so MacOS gradually moved away from actually using its unusual filesystem capabilities. Increasingly, MacOS applications only use the data fork of files, the part of the file that corresponds to what other operating systems think of as <q>the file.</q></p>
+
+  <p>But as programs written in <q>classic</q> MacOS become increasingly difficult to run on contemporary computer configurations, it is increasingly difficult to get data out of documents that were written with these programs that are harder and harder to run. Data that a Macintosh program in the 1980s or 1990s placed in the resource fork of a document may be nearly impossible to get out today, especially if the program used to create the document was obscure or required a specific hardware that is difficult to reproduce or emulate today. In cases where a document exists in a format that can only be read by a program that cannot be found, or cannot be run, it may be that the only way to extract <em>any</em> data from the file is to pick through it manually, chunk by chunk, salvaging what can be salvaged. In circumstances like this, when getting <em>something</em> out of the file is preferable to salvaging <em>nothing</em>, Resource Dumper can help to extract <em>some</em> information from (some) files.</p>
+
+  <p>Resource Dumper does nothing with the data forks of files, and does nothing with their filesystem metadata; but it can extract resources from the resource forks of files (provided that the files have a resource fork in the first place) and turn them into more useful formats. This is not always useful in every situation&mdash;what does and doesn't go into a file's resource fork varies widely; it's a programmatic decision made by an applications designers&mdash;but it can be <em>one tool</em> used in an archaeological dig through a file, and is useful in some circumstances. There are also many circumstances in which it is not useful, and much resource data, even when liberated from the resource fork, is either uninteresting (an eight-byte data structure describing a rectangle that is the location on screen of the window for the word processor document whose resource fork you are examining) or difficult to deal with (data shoved into the resource fork of an application by its designers in an unknown and undocumented format). Sometimes <em>just getting the data out of the resource fork</em> is helpful, and that's what Resource Dumper is for. Sometimes it's not helpful, but Resource Dumper isn't smart enough to advise you in advance about whether your strategy is likely to get you closer to your goal.</p>
+
+  <h2 id+"caveat">Caveat</h2>
+
+  <p>In case it's not already obvious: this is a tool for power users of the classic MacOS. If, after reading the previous section, you don't know why you need this program, you probably don't. The intended user of Resource Dumper already knows why zie needs this software.</p>
+
+  <p>To use Resource Dumper effectively, you should understand the basic organizational structure of the Macintosh resource fork, including what <strong>resource types</strong> and <strong>resource IDs</strong> are. You should also have some familiarity with resource-hacking and/or -examining tools, such as ResEdit, (SA)Rez/(SA)DeRez, or Resourcerer.</p>
+
+  <h2 id="functionality">Functionality</h2>
+
+  <p>Resource Dumper currently has two functions that it can perform:</p>
+
+  <ul>
+    <li>It can <em>change resource types</em>. It does this not by altering an existing file in place, but rather by creating a new file and copying resources of a specified type to the new file, giving them the new file type in the process. Because the created file with the re-typed resources belongs to ResEdit, it's easy to examine or move these re-typed resources.
+      <ul>
+        <li><p>This is occasionally useful when:</p>
+            <ul>
+              <li>You have a tool that processes resources that store data in a particular format; but</li>
+              <li>it naively expects those resources to always have a certain resource type; and yet</li>
+              <li>somehow, you've got data in the resource fork whose binary representation is what the code would expect, but the resource is stored as a type that your tool doesn't expect.</li>
+            </ul>
+            <p>In this case, creating a new file with the relevant resources re-typed can make the data available to the tool. For instance, ResEdit can play <code>'snd&nbsp;'</code> resources, and this comes in handy sometimes; but if sound data in the same format has been stored in the resource fork of the application as an <code>'ASND'</code> resource, ResEdit will not be able to play the sound. Using Resource Dumper to re-package the resources as <code>'snd&nbsp;'</code> resources can be helpful in circumstances like these.</p>
+            <p>Note that there is in fact no guarantee that an <code>'ASND'</code> resource contains sound in the format that ResEdit expects, or indeed that it contains sound data at all! An application can tag any chunk of data with any four-character code it wants to use, and the application need not document their choice or obey common usage or do anything else that it doesn't want to do. The only way to find out for sure if it will work is to try it and see. Resource Dumper is a tool for people who want to do precisely that.</p>
+        </li>
+      </ul>
+    </li>
+    <li>It can be used to <em>dump resources to the data fork of new files</em>. This can make it much easier to move data to another operating system in some cases. 
+      <ul>
+        <li>For instance, it can be used to extract all <code>'TEXT'</code> resources from a file into <code>TEXT</code> files that could be moved to a Unix or Windows system.
+          <ul>
+            <li>Note that Resource Dumper simply dumps the resources without translating them in any way, and assumes that you know what you're doing: you could just as easily dump a group of <code>'snd&nbsp;'</code> resources to <code>TEXT</code> files, but that would just result in files that look like text files to MacOS but that can't be read by any word processor because they're packed full of gibberish characters.</li>
+          </ul>
+        </li>
+        <li>Or you could dump all of the <code>'PICT'</code> resources in a file to <code>PICT</code> files.
+          <ul>
+            <li>Note that this will not result in valid <code>PICT</code> files, because applications that deal with those files expect them to have a header, which <code>'PICT'</code> resources do not have, and <em>Resource Dumper does not do any translation at all of the data it's moving around</em>. However, the information is now out of the resource fork, and a header could be built in any number of ways by various programs.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <h2 id="caveat-2">Caveat</h2>
+
+  <p>Note the caveat expressed several times in the previous section: Resource Dumper moves data from one resource to another, and from the resource fork to the data fork, but it <em>never</em> alters that data while moving it. It relocates data but does not translate it. It leaves the sequence of bytes alone, making no modifications, while moving it from place to place.</p>
+  
+  <p>Resource Dumper is a tool that does this one operation, and is only part of a toolkit. It is not an all-in-one automated archaeologist for the resource fork.</p>
+  
+  <h2 id="is-not">Resource Dumper is Not ...</h2>
+  
+  <ul>
+    <li>... a useful archival tool. (In fact, it would be a <em>terrible</em> archival tool: It performs an operation that is not easily reversible, extracts selected information instead of producing a copy of the entire file, and can split one file into many.) If you want to produce archives of files from classic MacOS file systems, you should take a look at:
+      <ul>
+        <li>StuffIt</li>
+        <li>Compact Pro</li>
+        <li>BinHex or MacBinary, possibly followed by non-MacOS archiving tools</li>
+        <li>Disk Copy</li>
+        <li>Others?</li>
+      </ul>
+    </li>
+    <li>... a good way to prepare to transmit classic MacOS files over a network, or to another operating system. See the suggestions in the previous section.</li>
+    <li>... the ideal way to begin an initial exploration of the resource fork. Graphical overviews provided by ResEdit or Resourcerer, or the comprehensive textual output of DeRez, are much better way to get an overview of what's in the resource fork of a file.</li>
+    <li>... aware of or interested in the internal structure of the data blobs it moves around. It does not translate data; it only relocates it.</li>
+    <li>... an all-in-one data-recovery solution. It only performs the specific task of moving resource data around in certain ways.</li>
+    <li>... a good way to explore classic MacOS volumes. There are a number of better strategies here, including using emulators to convert and transfer data to a host operating system (I find BasiliskII is great for this); using various kinds of software to make a MacOS volume available directly to a contemporary operating system (such as <code>hfsprogs</code> for Linux); and using specialized exploration tools (such as HFVExplorer for Windows) to examine a volume directly and transfer its contents out of it.</li>
+    <li>... a tool that allows you to edit resource data in place. Try ResEdit or Resourcerer for that.</li>
+    <li>... useful if you don't have an installation of classic MacOS that's already running. Resource Dumper runs from <em>within</em> classic MacOS, possibly in an emulated environment; it's not something you can use with contemporary OSX, or from Windows or Linux.</li>
+  </ul>
+  
+  <h2 id="requirements">System Requirements</h2>
+  
+  <p><strike>Resource Dumper runs under any version of classic MacOS that can run 68k code&mdash;that's the original software architecture for the original Macintosh line of computers.</strike> Currently, Resource Dumper requires System 7 or later to perform most of the work that it does. It should soon be compatible with earlier versions of the system software (but this is an alpha version that does not yet have all core functionality implemented). PowerPC Macintoshes should be able to run Resource Dumper just fine. Resource Dumper runs just fine in an emulated Macintosh environment using BasiliskII, Mini vMac, or SheepShaver. (Other emulators have not been tested, but I would love to hear about your experience running it under environments created by them.)</p>
+  
+  <p>Note that Resource Dumper will <em>not</em> run directly under recent versions of OSX; you'll need to create a compatibility layer using one of the emulators mentioned above.</p>
+  
+  <h2 id="obtaining">Obtaining Resource Dumper</h2>
+  
+  <p>The most recent copy of Resource Dumper is available <a rel="author me" href="https://github.com/patrick-brian-mooney/dump-resources">on GitHub</a>. In addition to source code (as plain-text files) and documentation, there is a Disk Copy image, <code>Resource Dumper.img.hqx</code>, that contains a compiled binary. (The Disk Copy image also includes the project and resource files needed to run, test, and build the program in a development environment.)</p>
+  
+  <p>To use that disk image, you'll need to use a BinHex unarchiving tool, probably from within your classic MacOS installation. Once the disk image has been extracted, you can mount it as a virtual drive from within MacOS using Disk Copy, or can transfer it out to your host operating system and use it as a virtual drive in your emulator.</p>  
+  
+  <h2 id="license">License</h2>
+  
+  <p>Resource Dumper is copyright &copy; 2018 by Patrick Mooney. It is licensed under the GNU General Public License, either version 3 or (at your option) any later version. A copy of this license should have been provided to you with the program (as the file LICENSE.md), or you can <a rel="muse" href="https://www.gnu.org/licenses/gpl-3.0.en.html">read this license online</a>.</p>
+</body>
+</html>
