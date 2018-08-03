@@ -1,0 +1,6 @@
+*.p linguist-language=Pascal
+source/vendored/* linguist-vendored
+CREDITS linguist-documentation
+LICENSE.md linguist-documentation
+README linguist-documentation
+*hqx linguist-generated=true
