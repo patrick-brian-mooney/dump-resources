@@ -19,7 +19,7 @@
   <meta name="description" content="README file for Resource Dumper, a utility for classic MacOS" />
   <meta name="rating" content="general" />
   <meta name="revisit-after" content="2 days" />
-  <meta name="date" content="2018-08-10T18:02:55-0600" />
+  <meta name="date" content="2018-08-11T02:42:41-0600" />
   <meta property="fb:admins" content="100006098197123" />
   <meta property="og:title" content="Resource Dumper README" />
   <meta property="og:type" content="website" />
@@ -40,7 +40,7 @@
 
 <body>
   <h1>Resource Dumper</h1>
-  <p class="vevent"><abbr class="summary description" title="Documents for Resource Dumper v0.1a updated">v0.1b</abbr>, by <a rel="author" class="vcard fn url" href="http://patrickbrianmooney.nfshost.com/~patrick/">Patrick Mooney</a><br />
+  <p class="vevent"><abbr class="summary description" title="Documents for Resource Dumper v0.1a updated">v0.1c</abbr>, by <a rel="author" class="vcard fn url" href="http://patrickbrianmooney.nfshost.com/~patrick/">Patrick Mooney</a><br />
   <a rel="me author" class="url" href="https://github.com/patrick-brian-mooney/dump-resources">Project homepage</a><br />
   <abbr class="dtstart" title="2018-08-10">10 August 2018</abbr></p>
   
@@ -60,6 +60,7 @@
       </ul>
     </li>
     <li><a href="#is-not">Resource Dumper Is Not ...</a></li>
+    <li><a href="#limitations">Other Known Limitations</a></li>
     <li><a href="#requirements">System Requirements</a></li>
     <li><a href="#obtaining">Obtaining Resource Dumper</a></li>
     <li><a href="#license">License</a></li>
@@ -164,6 +165,13 @@
     <li>... a good way to explore classic MacOS volumes. There are a number of better strategies here, including using emulators to convert and transfer data to a host operating system (I find BasiliskII is great for this); using various kinds of software to make a MacOS volume available directly to a contemporary operating system (such as <code>hfsprogs</code> for Linux); and using specialized exploration tools (such as HFVExplorer for Windows) to examine a volume directly and transfer its contents out of it.</li>
     <li>... a tool that allows you to edit resource data in place. Try ResEdit or Resourcerer for that.</li>
     <li>... useful if you don't have an installation of classic MacOS that's already running. Resource Dumper runs from <em>within</em> classic MacOS, possibly in an emulated environment; it's not something you can use directly in contemporary OSX, or from Windows or Linux.</li>
+  </ul>
+  
+  <h2 id="limitations">Other Known Limitations</h2>
+  
+  <ul>
+    <li>Resource Dumper does not (yet) working under versions of MacOS earlier than 7.0.</li>
+    <li>Resource Dumper needs to be able to read each resource entirely into memory in order to process it. This will not be a problem in many circumstances, but it may make it difficult to dump large resources. (The better way to handle this would involve taking advantage of code in System 7 or later that can read and write partial resources so that the entire enormous resource need not all be read at one time, and to fail gracefully under System 6 with a note telling the user it could be done under System 7; but this has not yet been implemented.) For now, if Resource Dumper complains about being out of memory (or complains with a -108 error code), try quitting the program, increasing the memory requirements in the Get Info window in the Finder, and trying again.</li>  
   </ul>
   
   <h2 id="requirements">System Requirements</h2>
