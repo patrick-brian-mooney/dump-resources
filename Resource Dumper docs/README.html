@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="stylesheet" type="text/css" href="/~patrick/css/content.css" />
+  <link rel="stylesheet" type="text/css" href="http://patrickbrianmooney.nfshost.com/~patrick/css/content.css" />
   <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://patrickbrianmooney.nfshost.com/~patrick/foaf.rdf" />
   <meta name="foaf:maker" content="foaf:mbox_sha1sum '48a3091d919c5e75a5b21d2f18164eb4d38ef2cd'" />
   <link rel="profile" href="http://microformats.org/profile/hcard" />
@@ -19,7 +19,7 @@
   <meta name="description" content="README file for Resource Dumper, a utility for classic MacOS" />
   <meta name="rating" content="general" />
   <meta name="revisit-after" content="2 days" />
-  <meta name="date" content="2018-08-09T20:21:49-0600" />
+  <meta name="date" content="2018-08-10T18:02:55-0600" />
   <meta property="fb:admins" content="100006098197123" />
   <meta property="og:title" content="Resource Dumper README" />
   <meta property="og:type" content="website" />
@@ -32,15 +32,38 @@
   <meta name="twitter:title" content="Resource Dumper README" />
   <meta name="twitter:description" content="README file for Resource Dumper, a utility for classic MacOS" />
   <meta name="twitter:image:src" content="http://patrickbrianmooney.nfshost.com/~patrick/icons/gear-large.png" />
+  
+  <style type="text/css">
+    .float-right { vertical-align: top; position: relative; float: right; left:.3in; }
+  </style>
 </head>
 
 <body>
   <h1>Resource Dumper</h1>
   <p class="vevent"><abbr class="summary description" title="Documents for Resource Dumper v0.1a updated">v0.1b</abbr>, by <a rel="author" class="vcard fn url" href="http://patrickbrianmooney.nfshost.com/~patrick/">Patrick Mooney</a><br />
   <a rel="me author" class="url" href="https://github.com/patrick-brian-mooney/dump-resources">Project homepage</a><br />
-  <abbr class="dtstart" title="2018-08-09">9 August 2018</abbr></p>
+  <abbr class="dtstart" title="2018-08-10">10 August 2018</abbr></p>
   
   <p><small>Just looking for a download link? Download <a rel="me author" href="https://github.com/patrick-brian-mooney/dump-resources/blob/master/Resource%20Dumper.img"><code>Resource Dumper.img</code></a>.</small></p>
+  
+  <h2 id="contents">Contents</h2>
+  
+  <ul class="xoxo">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#caveat">Caveat 1</a></li>
+    <li><a href="#functionality">Functionality</a></li>
+    <li><a href="#caveat-2">Caveat 2</a></li>
+    <li><a href="#usage">Program Usage</a>
+      <ul>
+        <li><a href="#re-type">Changing the resource type of resources in a file</a></li>
+        <li><a href="#dump">Dumping resources to data files</a></li>
+      </ul>
+    </li>
+    <li><a href="#is-not">Resource Dumper Is Not ...</a></li>
+    <li><a href="#requirements">System Requirements</a></li>
+    <li><a href="#obtaining">Obtaining Resource Dumper</a></li>
+    <li><a href="#license">License</a></li>
+  </ul>
 
   <h2 id="overview">Overview</h2>
 
@@ -102,8 +125,28 @@
   
   <p>Resource Dumper is a tool that does this one operation, and is only part of a toolkit. It is not an all-in-one automated archaeologist for the resource fork.</p>
   
-  <h2 id="is-not">Resource Dumper is Not ...</h2>
+  <h2 id="usage">Program Usage</h2>
+
+  <p>Resource Dumper's functions are accessible via the <code>Dump</code> menu.</p>
   
+  <h3 id="re-type">Changing the resource type of resources in a file</h3>
+  
+  <p><img src="images/retype1.gif" height="200" width="300" alt="the re-type resources dialog" class="float-right">Choose <q>Resources to new file, changing resource type ...</q> from the <code>Dump</code> menu, then select the file containing the resources you want to re-type.</p> 
+  
+  <p>Resource Dumper will display a dialog asking you to specify how you want the resources to be converted and saved. Specify the current resource type of the resource you would like to export from the selected file, then the resource type you would like those resources to have in the new file. Resource Dumper will then create a new file containing the re-typed resources. (Note that, for security purposes, Resource Dumper makes no attempt to modify the original file in place.) The new file will belong to ResEdit, so it should be easy to examine the re-typed resources or move them around if necessary.</p>
+  
+  <p>Note also that Resource Dumper does not make any provision for you to browse or enumerate individual resources in files. Nor does it give you any way to examine the resources in the new file. You'll need to use another tool, such as ResEdit, to do those things.</p>
+  
+  <h3 id="dump">Dumping resources to data files</h3>
+  
+  <p><img src="images/dump1.gif" height="200" width="300" alt="the re-type resources dialog" class="float-right">Choose <q>All resources of type to data files in new folder ...</q> from the <code>Dump</code> menu, then select the file containing the resources you want to dump.</p>
+  
+  <p><p>Resource Dumper will display a dialog asking you which resources you would like to dump. You should enter the resource type of the resources; you may also restrict which resources are dumped by specifying that only resources whose IDs are within a certain range be dumped. (Again, note that Resource Dumper provides no interface to <em>explore</em> the file you are dumping. You'll need to use other tools for that.)</p>
+  
+  <p>Resource Dumper will then ask you to specify where it should create a new folder, then it will dump all of the resources of the specified type and specified ID range into files (containing only a data fork) in that new folder. (If you are running Resource Dumper from within an emulator that provides access to the host operating system's file system, such as BasiliskII, then you can, if you wish, use that functionality to dump the files directly into the host operating system's filesystem.)</p> 
+  
+  <h2 id="is-not">Resource Dumper is Not ...</h2>
+
   <ul>
     <li>... a useful archival tool. (In fact, it would be a <em>terrible</em> archival tool: It performs an operation that is not easily reversible, extracts selected information instead of producing a copy of the entire file, and can split one file into many.) If you want to produce archives of files from classic MacOS file systems, you should take a look at:
       <ul>
