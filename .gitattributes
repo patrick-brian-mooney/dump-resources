@@ -1,4 +1,4 @@
-*.p linguist-language=Pascal
+*.p linguist-language=Pascal diff=mac2unix
 source/vendored/* linguist-vendored
 CREDITS linguist-documentation
 LICENSE.md linguist-documentation

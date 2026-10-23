@@ -1,0 +1,1 @@
+unit declarations; { Unit for use in CodeWarrior/MPW to define compiler variables that are defined }{ in the project file under THINK Pascal. }interface {$IFC undefined debugging}{$SETC debugging=0}{$ENDC}{$IFC undefined DEBUG_WITH_BUTTON_WAIT}{$SETC DEBUG_WITH_BUTTON_WAIT=0}{$ENDC}implementation end.
